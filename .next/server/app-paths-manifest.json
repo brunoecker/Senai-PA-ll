@@ -1,9 +1,5 @@
 {
-  "/not-found": "app/not-found.js",
-  "/(web)/page": "app/(web)/page.js",
-  "/(web)/rooms/page": "app/(web)/rooms/page.js",
   "/(web)/auth/page": "app/(web)/auth/page.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/api/room-reviews/[id]/route": "app/api/room-reviews/[id]/route.js",
-  "/(web)/rooms/[slug]/page": "app/(web)/rooms/[slug]/page.js"
+  "/(web)/rooms/page": "app/(web)/rooms/page.js",
+  "/(web)/page": "app/(web)/page.js"
 }

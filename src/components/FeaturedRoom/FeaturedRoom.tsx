@@ -2,30 +2,32 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
-
 import { Room } from '@/models/room';
 import Link from 'next/link';
 
 type Props = {
-  featuredRoom: Room;
+  featuredRoom: Room | null; // Permitir que featuredRoom seja null
 };
 
-const FeaturedRoom: FC<Props> = props => {
-  const { featuredRoom } = props;
+const FeaturedRoom: FC<Props> = ({ featuredRoom }) => {
+  // Verificar se featuredRoom é nulo
+  if (!featuredRoom) {
+    return <div>Loading...</div>; // Ou uma mensagem/placeholder de erro
+  }
 
   return (
     <section className='flex md:flex-row flex-col px-4 py-10 items-center gap-12 container mx-auto'>
       <div className='md:grid gap-8 grid-cols-1'>
         <div className='rounded-2xl overflow-hidden h-48 mb-4 md:mb-0'>
           <Image
-            src={featuredRoom.coverImage.url}
+            src={featuredRoom.coverImage?.url || '/path/to/default/image.jpg'} // Imagem padrão se coverImage for null
             alt={featuredRoom.name}
             width={700}
             height={700}
             className='img scale-animation'
           />
         </div>
-       
+
         {/* <div className='grid grid-cols-2 gap-8 h-48'>
           {featuredRoom.images.splice(1, 2).map(image => (
             <div key={image._key} className='rounded-2xl overflow-hidden'>
@@ -37,7 +39,7 @@ const FeaturedRoom: FC<Props> = props => {
                 className='img scale-animation'
               />
             </div>
-          ))}
+          ))} 
         </div> */}
       </div>
 
@@ -54,13 +56,14 @@ const FeaturedRoom: FC<Props> = props => {
                 R$ {featuredRoom.price}
               </p>
             </div>
-            {/* <div className='flex gap-3 flex-col items-center justify-center mr-4'>
+            {/* 
+            <div className='flex gap-3 flex-col items-center justify-center mr-4'>
               <p className='text-xs lg:text-xl text-center'>Desconto</p>
               <p className='md:font-bold flex font-medium text-lg xl:text-5xl'>
-                
-                 R$ {featuredRoom.discount} 
+                R$ {featuredRoom.discount} 
               </p>
-            </div> */}
+            </div> 
+            */}
           </div>
 
           <Link
